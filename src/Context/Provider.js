@@ -6,6 +6,7 @@ const ENDPOINT = 'https://swapi.dev/api/planets';
 
 function Provider({ children }) {
   const [planetsApi, setPlanetsApi] = useState([]);
+  const [filtredResults, setFiltredResults] = useState([]);
 
   useEffect(() => {
     const getApiPlanets = async () => {
@@ -23,6 +24,8 @@ function Provider({ children }) {
 
   const contextValue = {
     planetsApi,
+    filtredResults,
+    setFiltredResults,
   };
 
   return (
