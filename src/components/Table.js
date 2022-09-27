@@ -1,24 +1,15 @@
 import React, { useContext } from 'react';
 import starWarsPlanetsContext from '../Context/ContextStarWarsPlanets';
+import Filter from './Filter';
 
 function Table() {
   const { planetsApi,
     filtredResults,
-    setFiltredResults,
   } = useContext(starWarsPlanetsContext);
 
   return (
     <div>
-      <form>
-        <input
-          data-testid="name-filter"
-          type="text"
-          id="filtredResults"
-          name="filtredResults"
-          value={ filtredResults }
-          onChange={ ({ target }) => setFiltredResults(target.value) }
-        />
-      </form>
+      <Filter />
       <table>
         <thead>
           <tr>
@@ -38,27 +29,23 @@ function Table() {
           </tr>
         </thead>
         <tbody>
-          {planetsApi
-            .filter((line) => (
-              line.name.toLowerCase().includes(filtredResults)
-            ))
-            .map((planet) => (
-              <tr key={ planet.name }>
-                <td>{ planet.name }</td>
-                <td>{ planet.rotation_period }</td>
-                <td>{ planet.orbital_period }</td>
-                <td>{ planet.diameter }</td>
-                <td>{ planet.climate }</td>
-                <td>{ planet.gravity }</td>
-                <td>{ planet.terrain }</td>
-                <td>{ planet.surface_water }</td>
-                <td>{ planet.population }</td>
-                <td>{ planet.films }</td>
-                <td>{ planet.created }</td>
-                <td>{ planet.edited }</td>
-                <td>{ planet.url }</td>
-              </tr>
-            ))}
+          {(filtredResults.length === 0 ? planetsApi : filtredResults).map((planet) => (
+            <tr key={ planet.name }>
+              <td>{ planet.name }</td>
+              <td>{ planet.rotation_period }</td>
+              <td>{ planet.orbital_period }</td>
+              <td>{ planet.diameter }</td>
+              <td>{ planet.climate }</td>
+              <td>{ planet.gravity }</td>
+              <td>{ planet.terrain }</td>
+              <td>{ planet.surface_water }</td>
+              <td>{ planet.population }</td>
+              <td>{ planet.films }</td>
+              <td>{ planet.created }</td>
+              <td>{ planet.edited }</td>
+              <td>{ planet.url }</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

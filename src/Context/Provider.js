@@ -6,6 +6,8 @@ const ENDPOINT = 'https://swapi.dev/api/planets';
 
 function Provider({ children }) {
   const [planetsApi, setPlanetsApi] = useState([]);
+  const [filters, setFilters] = useState({});
+  const [name, setName] = useState('');
   const [filtredResults, setFiltredResults] = useState([]);
 
   useEffect(() => {
@@ -17,15 +19,73 @@ function Provider({ children }) {
         return info;
       });
       setPlanetsApi(filterdata);
-      console.log(filterdata);
     };
     getApiPlanets();
   }, []);
 
+  useEffect(() => {
+    const filteredPlanetsByNames = planetsApi.filter((planetName) => planetName.name
+      .toLowerCase().includes(name.toLowerCase()));
+    setFiltredResults(filteredPlanetsByNames);
+    console.log(filteredPlanetsByNames);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [name]);
+
+  function valueComparator(inputValue, value, comparison) {
+    console.log(inputValue, value);
+    switch (comparison) {
+    case 'igual a':
+      return Number(inputValue) === Number(value);
+
+    case 'menor que':
+      return Number(inputValue) < Number(value);
+
+    case 'maior que':
+      return Number(inputValue) > Number(value);
+
+    default:
+      return false;
+    }
+  }
+
+  const filteredPlanets = planetsApi
+    .filter((planet) => Object.entries(filters)
+      .every(([column, filter]) => valueComparator(planet[column],
+        filter.value, filter.comparison)));
+  console.log(filteredPlanets);
+
+  useEffect(() => {
+    setFiltredResults(filteredPlanets);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters]);
+
+  function filterByInput() {
+    setFiltredResults(filteredPlanets);
+  }
+
+  function filterByNumericValue(column, comparison, value) {
+    setFilters({
+      ...filters,
+      [column]: {
+        comparison,
+        value,
+      },
+    });
+  }
+
+  function filterByName(payload) {
+    setName(payload);
+  }
+
   const contextValue = {
     planetsApi,
     filtredResults,
-    setFiltredResults,
+    filterByName,
+    name,
+    filters,
+    filteredPlanets,
+    filterByInput,
+    filterByNumericValue,
   };
 
   return (
