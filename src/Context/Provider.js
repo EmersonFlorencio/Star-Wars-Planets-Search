@@ -32,7 +32,6 @@ function Provider({ children }) {
   }, [name]);
 
   function valueComparator(inputValue, value, comparison) {
-    console.log(inputValue, value);
     switch (comparison) {
     case 'igual a':
       return Number(inputValue) === Number(value);

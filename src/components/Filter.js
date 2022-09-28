@@ -2,15 +2,16 @@ import React, { useContext, useState } from 'react';
 import starWarsPlanetsContext from '../Context/ContextStarWarsPlanets';
 
 function Filter() {
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('maior que');
-  const [value, setValue] = useState('0');
+  const [filterValue, setFilterValue] = useState({
+    column: 'population',
+    comparison: 'maior que',
+    value: '0',
+  });
 
   const { filters,
     name,
     filterByName,
     filterByNumericValue,
-    // filterByInput,
   } = useContext(starWarsPlanetsContext);
 
   const validColumns = ['population', 'orbital_period', 'diameter',
@@ -26,10 +27,10 @@ function Filter() {
 
     if (validColumns.length === 0) return;
 
-    const validColumn = column || validColumns[0];
+    const validColumn = filterValue.column || validColumns[0];
     console.log(validColumn);
 
-    filterByNumericValue(validColumn, comparison, value);
+    filterByNumericValue(validColumn, filterValue.comparison, filterValue.value);
   }
 
   return (
@@ -48,35 +49,35 @@ function Filter() {
           id="column-filter"
           data-testid="column-filter"
           name="column"
-          value={ column }
-          onChange={ (event) => setColumn(event.target.value) }
+          value={ filterValue.column }
+          onChange={ ({ target }) => setFilterValue({ ...filterValue,
+            column: target.value }) }
         >
           {validColumns.map((validColumn) => (
             <option key={ validColumn } value={ validColumn }>{validColumn}</option>
           ))}
         </select>
-
         <select
           id="comparison-filter"
           data-testid="comparison-filter"
           name="comparison"
-          value={ comparison }
-          onChange={ (event) => setComparison(event.target.value) }
+          value={ filterValue.comparison }
+          onChange={ ({ target }) => setFilterValue({ ...filterValue,
+            comparison: target.value }) }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
           <option value="igual a">igual a</option>
         </select>
-
         <input
           type="number"
           id="value-filter"
           data-testid="value-filter"
           name="value"
-          value={ value }
-          onChange={ (event) => setValue(Number(event.target.value)) }
+          value={ filterValue.value }
+          onChange={ ({ target }) => setFilterValue({ ...filterValue,
+            value: target.value }) }
         />
-
         <button
           type="submit"
           data-testid="button-filter"
