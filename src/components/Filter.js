@@ -24,13 +24,15 @@ function Filter() {
 
   function handleFilter(event) {
     event.preventDefault();
-
     if (validColumns.length === 0) return;
 
-    const validColumn = filterValue.column || validColumns[0];
+    const validColumn = filterValue.column ? filterValue.column : validColumns[0];
+
     console.log(validColumn);
 
     filterByNumericValue(validColumn, filterValue.comparison, filterValue.value);
+    setFilterValue({ ...filterValue,
+      column: 'population' });
   }
 
   return (
