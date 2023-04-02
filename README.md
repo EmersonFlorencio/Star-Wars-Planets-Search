@@ -1,10 +1,23 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Projeto Star Wars Planets Search!
+
+## Descrição do Projeto
+
+Projeto realizado no modulo de front-end de uma aplicação que consiga pesquisar e filtrar uma tabela de forma dinamica.
+
+---
+
+## Minha experiencia em desenvolver o projeto
+
+Nesse projeto tive um pouco de dificuldade de entender os conceitos de context API e a ultilização de hooks, precisei me esforçar a mais para absorver o conteudo das aulas, videos e outras fontes de informação para concluir o projeto, ainda preciso reforça meu entendimento e desenvolver mais aplicações para solidificar os conceitos apresentados no projeto.
+
+---
+
+## Arquivos desenvolvidor por mim
+
+* Arquivos da Pasta Components
+* Arquivos e configuração do Context
+* Arquivos de test
+
+---
+
+<strong>Desenvolvido por Emerson Florencio</strong>
