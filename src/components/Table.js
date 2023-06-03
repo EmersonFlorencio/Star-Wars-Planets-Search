@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import starWarsPlanetsContext from '../Context/ContextStarWarsPlanets';
 import Filter from './Filter';
 
+import '../styles/table-styles.css';
+
 function Table() {
   const { planetsApi,
     filtredResults,
@@ -10,7 +12,7 @@ function Table() {
   return (
     <div>
       <Filter />
-      <table>
+      <table className="table-container">
         <thead>
           <tr>
             <th>Name</th>
@@ -28,7 +30,7 @@ function Table() {
             <th>URL</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="tbody-container">
           {(filtredResults.length === 0 ? planetsApi : filtredResults).map((planet) => (
             <tr key={ planet.name }>
               <td>{ planet.name }</td>

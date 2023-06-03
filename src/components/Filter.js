@@ -1,11 +1,13 @@
 import React, { useContext, useState } from 'react';
 import starWarsPlanetsContext from '../Context/ContextStarWarsPlanets';
 
+import '../styles/filter-styles.css';
+
 function Filter() {
   const [filterValue, setFilterValue] = useState({
     column: 'population',
     comparison: 'maior que',
-    value: '0',
+    value: '',
   });
 
   const { filters,
@@ -37,7 +39,7 @@ function Filter() {
 
   return (
     <section>
-      <form onSubmit={ handleFilter }>
+      <form onSubmit={ handleFilter } className="form-container">
         <input
           data-testid="name-filter"
           type="text"
@@ -45,6 +47,7 @@ function Filter() {
           name="name"
           onChange={ handleName }
           value={ name }
+          placeholder="Digite um Planeta Aqui"
         />
 
         <select
@@ -83,6 +86,7 @@ function Filter() {
         <button
           type="submit"
           data-testid="button-filter"
+          className="button-filter"
         >
           Filtrar
         </button>
